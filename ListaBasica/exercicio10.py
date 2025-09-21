@@ -1,5 +1,5 @@
-# 9. Cálculo de Área:
-base = float(input("Base do retangulo: \n"))
-altura = float(input("Altura do retangulo: \n"))
+# 10. Calculadora de Números Decimais:
+num1 = float(input("Dê um numero: \n"))
+num2 = float(input("Dê outro numero: \n"))
 
-print(f"area: {base * altura}")
+print(f"Soma: {num1 + num2} \nDivisao: {num1 / num2} \nMultiplicação: {num1 * num2} \nSubtração: {num1 - num2}")
