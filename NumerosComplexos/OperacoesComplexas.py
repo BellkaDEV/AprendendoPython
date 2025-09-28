@@ -11,12 +11,28 @@ class complexNum:
             return complexNum(self.parteReal, (-1)*self.parteImag)
         
     def printar(self):
-        if self.parteImag != 0 and self.parteImag > 0:
-            print(f"{round(self.parteReal, 2)}+{round(self.parteImag, 2)}i")
-        elif self.parteImag != 0 and self.parteImag < 0:
-            print(f"{round(self.parteReal, 2)}{round(self.parteImag, 2)}i")
-        elif self.parteImag == 0:
-            print(round(self.parteReal, 2))
+        real = round(self.parteReal)
+        imag = round(self.parteImag)
+        if imag == 0:
+            return str(real)
+        elif real == 0:
+            if imag == 1:
+                return "i"
+            elif imag == -1:
+                return "-i"
+            else:
+                return f"{imag}i"
+        else:
+            if imag > 0:
+                if imag == 1:
+                    return f"{real}+i"
+                else: 
+                    return f"{real}+{imag}i"
+            else:
+                if imag == -1:
+                    return f"{real}-i"
+                else:
+                    return f"{real}{imag}i"
 
     def soma(self, num2):
         return complexNum(
@@ -50,6 +66,10 @@ class complexNum:
     def mirrow(self) :
         return complexNum(self.parteReal, self.parteImag)
 
+def invalido(opc):
+    if (opc != 1) and (opc != 2) and (opc != 3) and (opc != 4) and (opc != 5):
+        return True
+
 def menu() :
     print("1. Potencias de i.")
     print("2. Operações com i.")
@@ -79,34 +99,52 @@ if __name__ == "__main__":
     opc1 = 0
     
 while opc != 3:
+    opc1 = 0
+    opc = 0
     menu()
     opc = int(input("Digite sua escolha: "))
     match opc:
         case 1:
-            p = input("Digite a potecia de i: ")
+            p = int(input("Digite a potecia de i: "))
             print(f"O valor final de i é igual a: {potenciaI(p)}")
         case 2:
             while opc1 != 6:
-                a = input("Digite a parte Real do primeiro numero complexo: ")
-                b = input("Digite a parte Imaginaria do primeiro numero complexo: ")
-                n1 = complexNum(a, b)
-
-                a = input("Digite a parte Real do segundo numero complexo: ")
-                b = input("Digite a parte Imaginaria do segundo numero complexo: ")
-                n2 = complexNum(a, b)
-
                 menu2()
                 opc1 = int(input("Oque pretende fazer com esses dois numeros? \nDigite sua escolha: "))
+        
+                if not invalido(opc1):
+                    a = float(input("Digite a parte Real do primeiro numero complexo: "))
+                    b = float(input("Digite a parte Imaginaria do primeiro numero complexo: "))
+                    n1 = complexNum(a, b)
+
+                    a = float(input("Digite a parte Real do segundo numero complexo: "))
+                    b = float(input("Digite a parte Imaginaria do segundo numero complexo: "))
+                    n2 = complexNum(a, b)
+
                 match opc1:
                     case 1:
-                        print(f"A soma dos dois numeros complexos é: {n1.soma(n2)}")
+                        n3 = n1.soma(n2)
+                        print(f"\nPrimeiro número complexo {n1.printar()}")
+                        print(f"Segundo número complexo {n2.printar()}")
+                        print(f"A soma dos dois numeros complexos é: {n3.printar()}")
                     case 2:
-                        print(f"A subtração dos dois numeros complexos é: {n1.subtracao(n2)}")
+                        n3 = n1.subtracao(n2)
+                        print(f"\nPrimeiro número complexo {n1.printar()}")
+                        print(f"Segundo número complexo {n2.printar()}")
+                        print(f"A subtração dos dois numeros complexos é: {n3.printar()}")
                     case 3:
-                        print(f"A multiplicação dos dois numeros complexos é: {n1.multiplicacao(n2)}")
+                        n3 = n1.multiplicacao(n2)
+                        print(f"\nPrimeiro número complexo {n1.printar()}")
+                        print(f"Segundo número complexo {n2.printar()}")
+                        print(f"A multiplicação dos dois numeros complexos é: {n3.printar()}")
                     case 4:
-                        print(f"A divisão dos dois numeros complexos é: {n1.divisao(n2)}")
+                        n3 = n1.divisao(n2)
+                        print(f"\nPrimeiro número complexo {n1.printar()}")
+                        print(f"Segundo número complexo {n2.printar()}")
+                        print(f"A divisão dos dois numeros complexos é: {n3.printar()}")
                     case 5:
+                        print(f"\nPrimeiro número complexo {n1.printar()}")
+                        print(f"Segundo número complexo {n2.printar()}")
                         print(f"OS conjulgadoS dos dois numeros são: \n{n1.printar()} --> {(n1.conjulgado()).printar()}\n{n2.printar()} --> {(n2.conjulgado()).printar()}")
                     case 6:
                         break
@@ -118,4 +156,3 @@ while opc != 3:
             break
         case _:
             print("Opção inválida")
-os.system("clear")
