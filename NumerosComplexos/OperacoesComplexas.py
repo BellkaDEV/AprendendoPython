@@ -1,3 +1,4 @@
+import os
 class complexNum:
     def __init__(self, parteReal, parteImag):
         self.parteReal = parteReal
@@ -59,7 +60,8 @@ def menu2() :
     print("2. Subtração.")
     print("3. Multiplicação.")
     print("4. Divisão.")
-    print("5. Voltar.")
+    print("5. Conjulgado dos numeros.")
+    print("6. Voltar.")
 
 def potenciaI(p):
     if p % 4 == 0:
@@ -73,11 +75,47 @@ def potenciaI(p):
     
 if __name__ == "__main__":
 
-    n1 = complexNum(3, 4)
-    n2 = complexNum(2, -1)
-
+    opc = 0
+    opc1 = 0
     
-    n1.printar()
-    n2.printar()
-    n3 = n1.divisao(n2)
-    n3.printar()
+while opc != 3:
+    menu()
+    opc = int(input("Digite sua escolha: "))
+    match opc:
+        case 1:
+            p = input("Digite a potecia de i: ")
+            print(f"O valor final de i é igual a: {potenciaI(p)}")
+        case 2:
+            while opc1 != 6:
+                a = input("Digite a parte Real do primeiro numero complexo: ")
+                b = input("Digite a parte Imaginaria do primeiro numero complexo: ")
+                n1 = complexNum(a, b)
+
+                a = input("Digite a parte Real do segundo numero complexo: ")
+                b = input("Digite a parte Imaginaria do segundo numero complexo: ")
+                n2 = complexNum(a, b)
+
+                menu2()
+                opc1 = int(input("Oque pretende fazer com esses dois numeros? \nDigite sua escolha: "))
+                match opc1:
+                    case 1:
+                        print(f"A soma dos dois numeros complexos é: {n1.soma(n2)}")
+                    case 2:
+                        print(f"A subtração dos dois numeros complexos é: {n1.subtracao(n2)}")
+                    case 3:
+                        print(f"A multiplicação dos dois numeros complexos é: {n1.multiplicacao(n2)}")
+                    case 4:
+                        print(f"A divisão dos dois numeros complexos é: {n1.divisao(n2)}")
+                    case 5:
+                        print(f"OS conjulgadoS dos dois numeros são: \n{n1.printar()} --> {(n1.conjulgado()).printar()}\n{n2.printar()} --> {(n2.conjulgado()).printar()}")
+                    case 6:
+                        break
+                    case _:
+                        print("Opção inválida")
+                    
+        case 3: 
+            print("Saindo...")
+            break
+        case _:
+            print("Opção inválida")
+os.system("clear")
