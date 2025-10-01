@@ -1,6 +1,8 @@
 import os
+import math
+
 class complexNum:
-    def __init__(self, parteReal, parteImag):
+    def _init_(self, parteReal, parteImag):
         self.parteReal = parteReal
         self.parteImag = parteImag
 
@@ -52,7 +54,6 @@ class complexNum:
                 (self.parteReal * num2.parteImag) + (self.parteImag * num2.parteReal)
                 )
             
-    
     def divisao(self, num2):
         conj = num2.conjulgado()
         numerador = self.multiplicacao(conj)
@@ -62,12 +63,26 @@ class complexNum:
         numerador.parteImag / denominador.parteReal
     )
 
+    def forma_polar(self):
+        modulo = math.hypot(self.parteReal, self.parteImag)
+        argumento_rad = math.atan2(self.parteImag, self.parteReal)
+        argumento_deg = math.degrees(argumento_rad)
+        
+        print("\n-------------------------------------------")
+        print(f"Número Complexo: {self.printar()}")
+        print("-------------------------------------------")
+        print(f"Módulo (r): {modulo:.4f}")
+        print(f"Argumento (θ) em Radianos: {argumento_rad:.4f} rad")
+        print(f"Argumento (θ) em Graus: {argumento_deg:.4f}°")
+        print("\nFórmula Polar (Forma Trigonométrica):")
+        print(f"z = {modulo:.4f} * (cos({argumento_deg:.4f}°) + i * sin({argumento_deg:.4f}°))")
+        print("-------------------------------------------\n")
 
     def mirrow(self) :
         return complexNum(self.parteReal, self.parteImag)
 
 def invalido(opc):
-    if (opc != 1) and (opc != 2) and (opc != 3) and (opc != 4) and (opc != 5):
+    if (opc != 1) and (opc != 2) and (opc != 3) and (opc != 4) and (opc != 5) and (opc != 6):
         return True
 
 def menu() :
@@ -81,7 +96,8 @@ def menu2() :
     print("3. Multiplicação.")
     print("4. Divisão.")
     print("5. Conjulgado dos numeros.")
-    print("6. Voltar.")
+    print("6. Forma Polar.")
+    print("7. Voltar.")
 
 def potenciaI(p):
     if p % 4 == 0:
@@ -93,7 +109,7 @@ def potenciaI(p):
     elif p % 4 == 1:
         return "-i"
     
-if __name__ == "__main__":
+if _name_ == "_main_":
 
     opc = 0
     opc1 = 0
@@ -108,7 +124,7 @@ while opc != 3:
             p = int(input("Digite a potecia de i: "))
             print(f"O valor final de i é igual a: {potenciaI(p)}")
         case 2:
-            while opc1 != 6:
+            while opc1 != 7:
                 menu2()
                 opc1 = int(input("Oque pretende fazer com esses dois numeros? \nDigite sua escolha: "))
         
@@ -147,10 +163,13 @@ while opc != 3:
                         print(f"Segundo número complexo {n2.printar()}")
                         print(f"OS conjulgadoS dos dois numeros são: \n{n1.printar()} --> {(n1.conjulgado()).printar()}\n{n2.printar()} --> {(n2.conjulgado()).printar()}")
                     case 6:
+                        print("\nCalculando a forma polar para o PRIMEIRO número informado:")
+                        n1.forma_polar()
+                    case 7: 
                         break
                     case _:
                         print("Opção inválida")
-                    
+                        
         case 3: 
             print("Saindo...")
             break
